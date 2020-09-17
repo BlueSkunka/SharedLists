@@ -1,4 +1,7 @@
 {
+    "behat/transliterator": {
+        "version": "v1.3.0"
+    },
     "brick/math": {
         "version": "0.9.1"
     },
@@ -86,6 +89,9 @@
     },
     "egulias/email-validator": {
         "version": "2.1.19"
+    },
+    "gedmo/doctrine-extensions": {
+        "version": "v2.4.42"
     },
     "laminas/laminas-code": {
         "version": "3.4.1"
