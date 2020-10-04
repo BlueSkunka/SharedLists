@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Main
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<div class="row">
+			<div class="app-presentation-container">
+				<div class="row">
+					<h1>Shared Lists</h1>
+				</div>
+				<div class="row">
+					Une application web, compatible pour mobile, permettant le partage de listes pour différents évènements tel que Noël.
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="login-container col-sm">
+				{{ render(controller('App\\Controller\\SecurityController::login')) }}
+			</div>
+
+			<div class="register-container col-sm">
+				{{ render(controller('App\\Controller\\RegistrationController::register')) }}
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

@@ -1,3 +1,58 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+
+# For unlogged users
+main:
+  path: /
+  controller: App\Controller\MainController::main
+
+# For logged users
+home:
+  path: /home
+  controller: App\Controller\HomeController::home
+
+# User paths
+user_infos:
+  path: /user_infos
+  controller: App\Controller\UserController::infos
+
+# Friends paths
+friends:
+  path: /friend
+  controller: App\Controller\FriendController::friends
+
+friend_new:
+  path: /new-friend
+  controller: App\Controller\FriendController::newFriend
+
+# Friend request paths
+friend_request_response:
+  path: /friend-request/{id}/{state}
+  controller: App\Controller\FriendController::friendRequestResponse
+
+# Groups path
+groups:
+  path: /groups
+  controller: App\Controller\GroupController::groups
+
+user_group_new:
+  path: /groups/new-user-group
+  controller: App\Controller\GroupController::newUserGroup
+
+user_group_view:
+  path: /groups/{id}
+  controller: App\Controller\GroupController::viewUserGroup
+
+user_group_request:
+  path: /groups/{id}/user-group-request
+  controller: App\Controller\GroupController::userGroupRequest
+
+# List path
+list_group_view:
+  path: /groups/{idGroup}/lists/{idList}
+  controller: App\Controller\ListController::listGroupView
+
+list_group_create:
+  path: /groups/{id}/list-group-create
+  controller: App\Controller\ListController::listGroupCreate

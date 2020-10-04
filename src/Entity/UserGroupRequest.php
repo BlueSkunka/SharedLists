@@ -26,7 +26,7 @@ class UserGroupRequest
     private $date;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $state;
 
@@ -40,6 +40,12 @@ class UserGroupRequest
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="receivedUserGroupRequests")
      */
     private $receiver;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=UserGroup::class, inversedBy="userGroupRequests")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $userGroup;
 
     public function getId(): ?int
     {
@@ -90,6 +96,18 @@ class UserGroupRequest
     public function setReceiver(?User $receiver): self
     {
         $this->receiver = $receiver;
+
+        return $this;
+    }
+
+    public function getUserGroup(): ?UserGroup
+    {
+        return $this->userGroup;
+    }
+
+    public function setUserGroup(?UserGroup $userGroup): self
+    {
+        $this->userGroup = $userGroup;
 
         return $this;
     }

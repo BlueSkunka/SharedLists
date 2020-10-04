@@ -43,10 +43,16 @@ class UserGroup
      */
     private $listGroups;
 
+    /**
+     * @ORM\OneToMany(targetEntity=UserGroupRequest::class, mappedBy="userGroup", orphanRemoval=true)
+     */
+    private $userGroupRequests;
+
     public function __construct()
     {
         $this->members = new ArrayCollection();
         $this->listGroups = new ArrayCollection();
+        $this->userGroupRequests = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -129,6 +135,37 @@ class UserGroup
             // set the owning side to null (unless already changed)
             if ($listGroup->getUserGroup() === $this) {
                 $listGroup->setUserGroup(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|UserGroupRequest[]
+     */
+    public function getUserGroupRequests(): Collection
+    {
+        return $this->userGroupRequests;
+    }
+
+    public function addUserGroupRequest(UserGroupRequest $userGroupRequest): self
+    {
+        if (!$this->userGroupRequests->contains($userGroupRequest)) {
+            $this->userGroupRequests[] = $userGroupRequest;
+            $userGroupRequest->setUserGroup($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserGroupRequest(UserGroupRequest $userGroupRequest): self
+    {
+        if ($this->userGroupRequests->contains($userGroupRequest)) {
+            $this->userGroupRequests->removeElement($userGroupRequest);
+            // set the owning side to null (unless already changed)
+            if ($userGroupRequest->getUserGroup() === $this) {
+                $userGroupRequest->setUserGroup(null);
             }
         }
 

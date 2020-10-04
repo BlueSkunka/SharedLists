@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<div class="group_list_group_list">
+					<h2>Listes du groupe</h2>
+					{% for list in group.listGroups %}
+						{{ list.name }}
+					{% else %}
+						Aucune liste pour le moment.
+					{% endfor %}
+				</div>
+			</div>
+			<div class="col">
+				<div class="group_creator row">
+					<h2>Créateur du groupe</h2>
+					{{ group.creator.username }}
+				</div>
+				<div class="group_members row">
+					<h2>Membres du groupe</h2>
+					{% for user in group.members %}
+						{{ user.username }}
+					{% else %}
+						Aucun membre pour le moment.
+					{% endfor %}
+				</div>
+			</div>
+			<div class="col">
+				<h2>Invitations au groupe</h2>
+				{% for request in group.userGroupRequests %}
+					{{ request.receiver.username }}
+				{% else %}
+					Aucune invitation pour le moment.
+				{% endfor %}
+			</div>
+			<div class="col">
+				<div class="group-list-new row">{{ render(controller('App\\Controller\\ListController::listGroupCreate', {'id': group.id})) }}
+				</div>
+				<div class="user-group-request-new row">
+					<h2>Inviter un ami</h2>
+					{{ render(controller('App\\Controller\\GroupController::userGroupRequest', {'id': group.id})) }}
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

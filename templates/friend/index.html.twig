@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<div class="container" id="friend-container">
+		{{ render(controller('App\\Controller\\FriendController::newFriend')) }}
+
+		<div class="row">
+			<div class="col-lg">
+				<div class="friends-list">
+					<h2>Liste d'ami.s</h2>
+					{% include "friend/friend_list.html.twig" %}
+				</div>
+			</div>
+			<div class="col-lg">
+				<div class="row">
+					<div class="friends-requests-send">
+						<h2>Invitation.s envoyée.s</h2>
+						{% include "friend/friend_request_send.html.twig" %}
+					</div>
+				</div>
+				<div class="row">
+					<div class="friends-requests-received">
+						<h2>Invitation.s reçue.s</h2>
+						{% include "friend/friend_request_received.html.twig" %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

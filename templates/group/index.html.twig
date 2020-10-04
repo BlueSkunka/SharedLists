@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<div class="container">
+		<div class="row">
+			{{ render(controller('App\\Controller\\GroupController::newUserGroup')) }}
+		</div>
+		<div class="row">
+			<div class="col-lg">
+				<div class="groups-list">
+					<h2>Liste des groupe.s</h2>
+					{% include "group/group_list.html.twig" %}
+				</div>
+			</div>
+			<div class="col-lg">
+				<div class="row">
+					<div class="groups-requests-send">
+						<h2>Invitation.s envoyée.s</h2>
+						{% include "group/group_request_send.html.twig" %}
+					</div>
+				</div>
+				<div class="row">
+					<div class="groups-requests-received">
+						<h2>Invitation.s reçue.s</h2>
+						{% include "group/group_request_received.html.twig" %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

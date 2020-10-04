@@ -1,0 +1,5 @@
+{% for friend in app.user.friends %}
+	{{ friend.username }}
+{% else %}
+	Aucun ami pour le moment.
+{% endfor %}

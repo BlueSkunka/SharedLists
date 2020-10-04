@@ -1,0 +1,17 @@
+{% if app.user.createdUserGroups|length > 0 %}
+	<h3>Groupe{{ app.user.createdUserGroups|length > 1 ? 's' : '' }}
+		crée{{ app.user.createdUserGroups|length > 1 ? 's' : '' }}</h3>
+
+	{% for group in app.user.createdUserGroups %}
+		<a href="{{ path('user_group_view', {'id': group.id }) }}">{{ group.name }}</a>
+	{% endfor %}
+{% endif %}
+
+{% if app.user.memberUserGroups|length > 0 %}
+	<h3>Groupe{{ app.user.memberUserGroups|length > 1 ? 's' : '' }}
+		rejoint{{ app.user.memberUserGroups|length > 1 ? 's' : '' }}</h3>
+
+	{% for group in app.user.memberUserGroups %}
+		{{ group.name }}
+	{% endfor %}
+{% endif %}

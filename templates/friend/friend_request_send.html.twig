@@ -1,0 +1,5 @@
+{% for request in app.user.SentFriendRequests %}
+	{{ request.date|date('d-m-Y') }}
+{% else %}
+	Aucune invitation envoyée.
+{% endfor %}

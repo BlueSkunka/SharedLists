@@ -1,0 +1,23 @@
+{% for label, messages in app.flashes(['success', 'warning']) %}
+	{% for message in messages %}
+		<div class="flash-{{ label }}">
+			{{ message }}
+		</div>
+	{% endfor %}
+{% endfor %}
+
+{{ form_start(form) }}
+
+<div class="row g-3 align-items-center">
+	<div class="col-auto">
+		<label for="user_group_name" class="col-form-label">Nom</label>
+	</div>
+	<div class="col-auto">
+		{{ form_widget(form.name) }}
+	</div>
+	<div class="col-auto">
+		<button type="submit" class="btn btn-sm btn-success">Créer un groupe</button>
+	</div>
+</div>
+
+{{ form_end(form) }}

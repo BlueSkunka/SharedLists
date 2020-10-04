@@ -1,0 +1,25 @@
+{% for label, messages in app.flashes(['success', 'warning']) %}
+	{% for message in messages %}
+		<div class="flash-{{ label }}">
+			{{ message }}
+		</div>
+	{% endfor %}
+{% endfor %}
+
+<div class="friend-request-new row">
+	{{ form_start(form) }}
+
+	{{ form_errors(form) }}
+	<div class="row g-3 align-items-center">
+		<div class="col-auto">
+			<label for="friend_request_name" class="col-form-label">Nom</label>
+		</div>
+		<div class="col-auto">
+			{{ form_widget(form.name) }}
+		</div>
+		<div class="col-auto">
+			<button type="submit" class="btn btn-sm btn-success">Ajouter un ami</button>
+		</div>
+	</div>
+	{{ form_end(form) }}
+</div>
