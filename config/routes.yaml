@@ -26,7 +26,6 @@ friend_new:
   path: /new-friend
   controller: App\Controller\FriendController::newFriend
 
-# Friend request paths
 friend_request_response:
   path: /friend-request/{id}/{state}
   controller: App\Controller\FriendController::friendRequestResponse
@@ -48,6 +47,10 @@ user_group_request:
   path: /groups/{id}/user-group-request
   controller: App\Controller\GroupController::userGroupRequest
 
+user_group_request_response:
+  path: /groups/{idGroup}/user-group-request/{idRequest}/response/{state}
+  controller: App\Controller\GroupController::userGroupRequestResponse
+
 # List path
 list_group_view:
   path: /groups/{idGroup}/lists/{idList}
@@ -56,3 +59,12 @@ list_group_view:
 list_group_create:
   path: /groups/{id}/list-group-create
   controller: App\Controller\ListController::listGroupCreate
+
+  # Listing path
+listing_create:
+  path: /list-group/{id}/listing-create
+  controller: App\Controller\ListingController::listingCreate
+
+listing_update:
+  path: /list-group/{idListGroup}/listing/{idListing}/update
+  controller: App\Controller\ListingController::listingUpdate

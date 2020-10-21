@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use App\Form\UserGroupType;
 use App\Form\UserGroupRequestType;
 use App\Entity\UserGroup;
@@ -102,6 +103,38 @@ class GroupController extends AbstractController
         return $this->render('group/user_group_request.html.twig', [
             'form' => $form->createView()
         ]);
+    }
+
+    /**
+     * @ParamConverter("userGroup", options={"id": "idGroup"})
+     * @ParamConverter("userGroupRequest", options={"id": "idRequest"})
+     */
+    public function userGroupRequestResponse(UserGroup $userGroup, UserGroupRequest $userGroupRequest, string $state)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $redirectPath = "";
+        $params = [];
+
+        if ("accept" == $state) {
+            $userGroupRequest->setState(true);
+
+            $userGroup->addMember($this->getUser());
+
+            $em->persist($userGroup);
+
+            $redirectPath = "user_group_view";
+            $params = ['id' => $userGroup->getId()];
+        } else {
+            $userGroupRequest->setState(false);
+
+            $redirectPath = "groups";
+        }
+
+        $em->persist($userGroupRequest);
+        $em->flush();
+
+        return $this->redirect($this->generateUrl($redirectPath, $params));
     }
 
 }

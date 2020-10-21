@@ -35,7 +35,7 @@ class Listing
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity=ListingItem::class, mappedBy="listing")
+     * @ORM\OneToMany(targetEntity=ListingItem::class, mappedBy="listing", cascade={"persist"})
      */
     private $listingItems;
 

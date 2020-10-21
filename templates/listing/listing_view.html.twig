@@ -1,0 +1,5 @@
+<h3>{{ listing.user.username }}</h3>
+
+{% for item in listing.listingItems %}
+    {{ item.name }} {{ item.reference != '' and item.reference is not null ? item.reference : '' }}
+{% endfor %}

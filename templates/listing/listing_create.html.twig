@@ -1,0 +1,20 @@
+<h2>Créer sa liste</h2>
+{{ form_start(form) }}
+    <button type="button" class="listing-add-item btn btn-sm btn-info" data-list-selector="ul#listing-create-form">Ajouter</button>
+    {{ form_errors(form) }}
+
+    <ul id="listing-create-form"
+        data-prototype="{{ form_widget(form.listingItems.vars.prototype)|e }}"
+        data-widget-tags="{{ '<li></li>'|e }}"
+        data-widget-counter"{{ form.listingItems|length }}">
+
+        {% for itemField in form.listingItems %}
+            {{ form_widget(itemField) }}
+            {{ form_errors(itemField) }}
+        {% endfor %}
+        
+    </ul>
+
+    <button type="submit" class="btn btn-sm btn-success">Valider</button>
+
+{{ form_end(form) }}

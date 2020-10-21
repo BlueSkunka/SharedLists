@@ -2,6 +2,37 @@
 
 {% block body %}
 	<div class="container">
-		{{ listGroup.name }}
+		<div class="row ariane">
+			<a href="{{ path('user_group_view', {'id': listGroup.userGroup.id}) }}">{{ listGroup.userGroup.name }}</a>
+			>
+			{{ listGroup.name }}
+		</div>
+
+		<div class="row">
+
+			{% if not listGroup.hasUserCreatedListing(app.user) %}
+				<div class="list-new col">
+					{{ render(controller('App\\Controller\\ListingController::listingCreate', {'id': listGroup.id})) }}
+				</div>
+			{% else %}
+				<div class="list-update col">
+					<h2>Modifier votre liste</h2>
+					{{ render(controller('App\\Controller\\ListingController::listingUpdate', {'idListGroup': listGroup.id, 'idListing': app.user.listingByListGroup(listGroup)})) }}
+				</div>		
+			{% endif %}
+						
+			<div class="list-list col">
+				<h2>Listes du groupe</h2>
+				{% for listing in listGroup.listings %}
+					{{ listing.user.username }}
+				{% else %}
+						Aucune liste crée.
+				{% endfor %}
+			</div>
+
+			<div class="list-listing-view col">
+				<h2>Liste de $user$</h2>
+			</div>
+		</div>
 	</div>
 {% endblock %}

@@ -2,12 +2,15 @@
 
 {% block body %}
 	<div class="container">
+		<div class="row ariane">
+			<div class="ariane-item">{{ group.name }}</div>
+		</div>
 		<div class="row">
 			<div class="col">
 				<div class="group_list_group_list">
 					<h2>Listes du groupe</h2>
 					{% for list in group.listGroups %}
-						{{ list.name }}
+						<a href="{{ path('list_group_view', {'idGroup': group.id, 'idList': list.id}) }}">{{ list.name }}</a><br>
 					{% else %}
 						Aucune liste pour le moment.
 					{% endfor %}

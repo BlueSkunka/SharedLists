@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Uid\Uuid;
+use App\Entity\Functions\UserFunctions;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -18,6 +19,8 @@ use Symfony\Component\Uid\Uuid;
 class User implements UserInterface
 {
     use SafetyEntityTraits;
+
+    use UserFunctions;
 
     /**
      * @ORM\Id

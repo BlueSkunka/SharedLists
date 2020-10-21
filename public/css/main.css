@@ -5,3 +5,11 @@ body {
 .hidden {
     display: none;
 }
+
+.inline {
+    display: inline;
+}
+
+.ariane {
+    display: inline;
+}

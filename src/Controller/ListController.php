@@ -10,6 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use App\Form\ListGroupType;
 use App\Entity\UserGroup;
 use App\Entity\ListGroup;
+use App\Entity\Listing;
 
 class ListController extends AbstractController
 {
@@ -58,4 +59,5 @@ class ListController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+
 }
