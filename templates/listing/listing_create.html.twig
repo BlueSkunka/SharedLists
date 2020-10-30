@@ -6,7 +6,7 @@
     <ul id="listing-create-form"
         data-prototype="{{ form_widget(form.listingItems.vars.prototype)|e }}"
         data-widget-tags="{{ '<li></li>'|e }}"
-        data-widget-counter"{{ form.listingItems|length }}">
+        data-widget-counter="{{ form.listingItems|length }}">
 
         {% for itemField in form.listingItems %}
             {{ form_widget(itemField) }}

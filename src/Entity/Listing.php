@@ -6,6 +6,7 @@ use App\Repository\ListingRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use App\Entity\Traits\SafetyEntityTraits;
+use App\Entity\Functions\ListingFunctions;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -14,6 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Listing
 {
     use SafetyEntityTraits;
+    use ListingFunctions;
 
     /**
      * @ORM\Id
@@ -35,7 +37,7 @@ class Listing
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity=ListingItem::class, mappedBy="listing", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity=ListingItem::class, mappedBy="listing", cascade={"persist", "remove"})
      */
     private $listingItems;
 

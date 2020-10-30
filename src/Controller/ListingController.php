@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use App\Form\ListingType;
 use App\Entity\UserGroup;
@@ -21,10 +22,6 @@ class ListingController extends AbstractController
 
         $listing = new Listing();
 
-        $item = new ListingItem();
-        $item->setName('Test');
-        $listing->addListingItem($item);
-
         $form = $this->createForm(ListingType::class, $listing, [
             'method' => 'POST',
             'action' => $this->generateUrl('listing_create', ['id' => $listGroup->getId()])
@@ -36,6 +33,8 @@ class ListingController extends AbstractController
             if ($form->isValid()) {
                 $listing->setListingGroup($listGroup);
                 $listing->setUser($this->getUser());
+
+                $listing->setListingItemsListing();
 
                 $em->persist($listing);
                 $em->flush();
@@ -73,6 +72,8 @@ class ListingController extends AbstractController
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
+                $listing->setListingItemsListing();
+
                 $em->persist($listing);
                 $em->flush();
 
@@ -95,6 +96,19 @@ class ListingController extends AbstractController
 
         return $this->render('listing/listing_update.html.twig', [
             'form' => $form->createView()
+        ]);
+    }
+
+    public function listingView(Listing $listing) {
+
+        $html =  $this->render('listing/listing_view.html.twig', [
+            'listing' => $listing
+        ]);
+
+        return new JsonResponse([
+            'state' => 'ok',
+            'username' => $listing->getUser()->getUsername(),
+            'html' => $html->getContent()
         ]);
     }
 }

@@ -24,14 +24,17 @@
 			<div class="list-list col">
 				<h2>Listes du groupe</h2>
 				{% for listing in listGroup.listings %}
-					{{ listing.user.username }}
+					<div class="listing-user" path="{{ path('listing_view', {'id': listing.id}) }}">
+						{{ listing.user.username }}
+					</div>
 				{% else %}
 						Aucune liste crée.
 				{% endfor %}
 			</div>
 
 			<div class="list-listing-view col">
-				<h2>Liste de $user$</h2>
+				<h2 id="listing-username"></h2>
+				<div class="list-container"></div>
 			</div>
 		</div>
 	</div>

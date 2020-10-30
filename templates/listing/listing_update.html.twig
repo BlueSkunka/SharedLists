@@ -1,11 +1,11 @@
 {{ form_start(form) }}
-    <button type="button" class="listing-update-add-item btn btn-sm btn-info" data-list-selector="ul#listing-create-form">Ajouter</button>
+    <button type="button" class="listing-add-item btn btn-sm btn-info hidden" data-list-selector="ul#listing-update-form">Ajouter</button>
     {{ form_errors(form) }}
 
     <ul id="listing-update-form"
         data-prototype="{{ form_widget(form.listingItems.vars.prototype)|e }}"
         data-widget-tags="{{ '<li></li>'|e }}"
-        data-widget-counter"{{ form.listingItems|length }}">
+        data-widget-counter="{{ form.listingItems|length }}">
 
         {% for itemField in form.listingItems %}
             {{ form_widget(itemField) }}
@@ -14,8 +14,8 @@
         
     </ul>
 
-    <button type="submit" class="btn btn-sm btn-success">Valider</button>
-    <button type="button" class="btn btn-sm btn-warning">Modifier</button>
-    <button type="button" class="btn btn-sm btn-danger">Annuler</button>
+        <button type="submit" id="listing-update-btn-submit" class="btn btn-sm btn-success col hidden">Valider</button>
+        <button type="button" id="listing-update-btn-update" class="btn btn-sm btn-warning col">Modifier</button>
+        <button type="button" id="listing-update-btn-cancel" class="btn btn-sm btn-danger col hidden">Annuler</button>
 
 {{ form_end(form) }}

@@ -68,3 +68,7 @@ listing_create:
 listing_update:
   path: /list-group/{idListGroup}/listing/{idListing}/update
   controller: App\Controller\ListingController::listingUpdate
+
+listing_view:
+  path: /listings/{id}
+  controller: App\Controller\ListingController::listingView
