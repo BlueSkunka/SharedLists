@@ -60,7 +60,7 @@ list_group_create:
   path: /groups/{id}/list-group-create
   controller: App\Controller\ListController::listGroupCreate
 
-  # Listing path
+# Listing path
 listing_create:
   path: /list-group/{id}/listing-create
   controller: App\Controller\ListingController::listingCreate
@@ -72,3 +72,8 @@ listing_update:
 listing_view:
   path: /listings/{id}
   controller: App\Controller\ListingController::listingView
+
+# ListingItem path
+listing_item_buy:
+  path: /listing-item/{id}/buy
+  controller: App\Controller\ListingController::listingItemBuy

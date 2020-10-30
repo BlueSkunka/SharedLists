@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\ListingItemRepository;
 use App\Entity\Traits\SafetyEntityTraits;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -35,6 +37,16 @@ class ListingItem
      * @ORM\JoinColumn(nullable=false)
      */
     private $listing;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Purchase::class, mappedBy="listingItem")
+     */
+    private $purchases;
+
+    public function __construct()
+    {
+        $this->purchases = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -76,4 +88,36 @@ class ListingItem
 
         return $this;
     }
+
+    /**
+     * @return Collection|Purchase[]
+     */
+    public function getPurchases(): Collection
+    {
+        return $this->purchases;
+    }
+
+    public function addPurchase(Purchase $purchase): self
+    {
+        if (!$this->purchases->contains($purchase)) {
+            $this->purchases[] = $purchase;
+            $purchase->setListingItem($this);
+        }
+
+        return $this;
+    }
+
+    public function removePurchase(Purchase $purchase): self
+    {
+        if ($this->purchases->contains($purchase)) {
+            $this->purchases->removeElement($purchase);
+            // set the owning side to null (unless already changed)
+            if ($purchase->getListingItem() === $this) {
+                $purchase->setListingItem(null);
+            }
+        }
+
+        return $this;
+    }
+
 }
