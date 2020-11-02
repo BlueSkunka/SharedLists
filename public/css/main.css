@@ -13,3 +13,17 @@ body {
 .ariane {
     display: inline;
 }
+
+.col {
+    background: #fff6ea;
+    border: 1px solid black;
+}
+
+.container-xxl {
+    max-width: 1720px;
+}
+
+.info {
+    font-size: 12px;
+    font-style: italic;
+}

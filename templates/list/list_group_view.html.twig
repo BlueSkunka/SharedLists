@@ -1,7 +1,7 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-	<div class="container">
+	<div class="container-xxl">
 		<div class="row ariane">
 			<a href="{{ path('user_group_view', {'id': listGroup.userGroup.id}) }}">{{ listGroup.userGroup.name }}</a>
 			>
@@ -16,13 +16,13 @@
 				</div>
 			{% else %}
 				<div class="list-update col">
-					<h2>Modifier votre liste</h2>
+					<h2>Votre liste</h2>
 					{{ render(controller('App\\Controller\\ListingController::listingUpdate', {'idListGroup': listGroup.id, 'idListing': app.user.listingByListGroup(listGroup)})) }}
 				</div>		
 			{% endif %}
 						
 			<div class="list-list col">
-				<h2>Listes du groupe</h2>
+				<h2>Listes du groupe<div class="info">(Cliquer sur un utilisateur pour visionner sa liste)</div></h2>
 				{% for listing in listGroup.listings %}
 					<div class="listing-user" path="{{ path('listing_view', {'id': listing.id}) }}">
 						{{ listing.user.username }}
@@ -37,5 +37,25 @@
 				<div class="list-container"></div>
 			</div>
 		</div>
+
+		<!-- Modal -->
+		<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+						<button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+						<button type="button" class="btn btn-success" id="purchase-item-validate">Valider</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
 	</div>
 {% endblock %}

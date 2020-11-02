@@ -1,7 +1,20 @@
 {% if listing is not null %}
-    {% for item in listing.listingItems %}
-        {{ item.name }} {{ item.reference != '' and item.reference is not null ? ' - ' ~ item.reference : '' }} <br>
-    {% endfor %}
+    <table class="table table-striped">
+        <tr>
+            <th>Nom</th>
+            <th>Information</th>
+            <th></th>
+        </tr>
+        {% for item in listing.listingItems %}
+            <tr>
+                <td>{{ item.name }}</td>
+                <td>{{ item.reference }} </td>
+                <td>
+                    <button type="button" class="btn btn-sm btn-info purchase-item" data-toggle="modal" data-target="#exampleModal" path="{{ path('listing_item_purchase', {'id': item.id}) }}">Choisir</button>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
 {% else %}
-    Ce membre ne possède pas de liste. 
+    Ce membre ne possède pas de liste.
 {% endif %}

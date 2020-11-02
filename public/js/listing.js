@@ -103,6 +103,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 let listUser = document.querySelector('h2#listing-username');
                 listUser.innerHTML = '';
                 listUser.insertAdjacentHTML('beforeend', 'Liste de ' + json['username']);
+
+                resetPurchaseButonEvent();
             };
 
             httpRequest.open("POST", path);
@@ -110,4 +112,37 @@ document.addEventListener("DOMContentLoaded", function () {
             httpRequest.send();
         })
     });
+
+    // Gestion choix item dans listing -  Show modal
+    function resetPurchaseButonEvent() {
+        [].forEach.call(document.querySelectorAll('.purchase-item'), function(el) {
+            el.addEventListener('click', function() {
+                const path = el.getAttribute('path'); // to define
+
+                var httpRequest = new XMLHttpRequest();
+                httpRequest.onreadystatechange = function() {
+                    const json = JSON.parse(httpRequest.response);
+
+                    let formContainer = document.querySelector('.modal-body');
+                    formContainer.innerHTML = '';
+                    formContainer.insertAdjacentHTML('beforeend', json['html']);
+
+                    let titleContainer = document.querySelector('.modal-title');
+                    titleContainer.innerHTML = '';
+                    titleContainer.insertAdjacentHTML('beforeend', 'Choisir "' + json['itemName'] + '"');
+                }
+
+                httpRequest.open("POST", path);
+                httpRequest.setRequestHeader("Content-Type", "text/json");
+                httpRequest.send();
+            })
+        })
+    }
+
+    // Gestion choix item dans listing - Validate choice
+    document.querySelector('#purchase-item-validate').addEventListener('click', function() {
+        console.log('submitting');
+        document.forms["purchase"].submit();
+    })
+    
 })

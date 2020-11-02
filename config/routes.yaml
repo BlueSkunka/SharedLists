@@ -73,7 +73,7 @@ listing_view:
   path: /listings/{id}
   controller: App\Controller\ListingController::listingView
 
-# ListingItem path
-listing_item_buy:
-  path: /listing-item/{id}/buy
-  controller: App\Controller\ListingController::listingItemBuy
+# Listing item path
+listing_item_purchase:
+  path: /listing-item/{id}/purchase
+  controller: App\Controller\ListingController::listingItemPurchase

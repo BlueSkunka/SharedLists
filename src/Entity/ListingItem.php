@@ -7,6 +7,7 @@ use App\Entity\Traits\SafetyEntityTraits;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Functions\ListingItemFunctions;
 
 /**
  * @ORM\Entity(repositoryClass=ListingItemRepository::class)
@@ -14,7 +15,8 @@ use Doctrine\ORM\Mapping as ORM;
 class ListingItem
 {
     use SafetyEntityTraits;
-
+    use ListingItemFunctions;
+    
     /**
      * @ORM\Id
      * @ORM\GeneratedValue

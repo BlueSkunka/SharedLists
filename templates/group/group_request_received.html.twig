@@ -1,5 +1,5 @@
 {% for request in app.user.receivedUserGroupRequests %}
-	<div class="row">
+	<div class="row inline">
 		{{ request.userGroup.name }}
 		<a href="{{ path('user_group_request_response', {'idGroup': request.userGroup.id, 'idRequest': request.id, 'state': 'accept'}) }}">Accepter</a>
 		<a href="{{ path('user_group_request_response', {'idGroup': request.userGroup.id, 'idRequest': request.id, 'state': 'refuse'}) }}">Refuser</a>

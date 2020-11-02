@@ -12,8 +12,18 @@ class ListingItemType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('reference')
+            ->add('name', null, [
+                'label' => 'Nom',
+                'attr' => [
+                    'class' => 'form-control'
+                ]
+            ])
+            ->add('reference', null, [
+                'label' => 'Information',
+                'attr' => [
+                    'class' => 'form-control'
+                ]
+            ])
         ;
     }
 

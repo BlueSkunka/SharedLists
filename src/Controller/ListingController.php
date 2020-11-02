@@ -9,10 +9,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use App\Form\ListingType;
+use App\Form\PurchaseType;
 use App\Entity\UserGroup;
 use App\Entity\ListGroup;
 use App\Entity\Listing;
 use App\Entity\ListingItem;
+use App\Entity\Purchase;
 
 class ListingController extends AbstractController
 {
@@ -108,6 +110,50 @@ class ListingController extends AbstractController
         return new JsonResponse([
             'state' => 'ok',
             'username' => $listing->getUser()->getUsername(),
+            'html' => $html->getContent()
+        ]);
+    }
+
+    public function listingItemPurchase(Request $request, ListingItem $listingItem) {
+        $em = $this->getDoctrine()->getManager();
+        
+        $purchase = new Purchase();
+        
+        $form = $this->createForm(PurchaseType::class, $purchase, [
+            'method' => 'POST',
+            'action' => $this->generateUrl('listing_item_purchase', ['id' => $listingItem->getId()]),
+            'max' => $listingItem->getMaxShare()
+        ]);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+            if ($form->isValid()) {
+                $purchase->setBuyer($this->getUser());
+                $purchase->setListingItem($listingItem);
+                $purchase->setMainPurchase($listingItem->isFirstPurchase());
+                $purchase->setState(false);
+
+                $em->persist($purchase);
+                $em->flush();
+
+                $this->addFlash('success', 'Prise en charge confirmé.');
+
+                return $this->redirect($this->generateUrl('list_group_view', [
+                    'idGroup' => $listingItem->getListing()->getListingGroup()->getUserGroup()->getId(), 
+                    'idList' => $listingItem->getListing()->getListingGroup()->getId()
+                ]));
+            }
+        }
+
+        $html = $this->render('listing/listing_item_purchase.html.twig', [
+            'form' => $form->createView(),
+            'listingItem' => $listingItem
+        ]);
+
+        return new JsonResponse([
+            'state' => 'ok',
+            'itemName' => $listingItem->getName(),
             'html' => $html->getContent()
         ]);
     }
