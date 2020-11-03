@@ -113,11 +113,13 @@ document.addEventListener("DOMContentLoaded", function () {
         })
     });
 
-    // Gestion choix item dans listing -  Show modal
+    // Gestion choix item dans listing -  Populate modal
     function resetPurchaseButonEvent() {
         [].forEach.call(document.querySelectorAll('.purchase-item'), function(el) {
             el.addEventListener('click', function() {
-                const path = el.getAttribute('path'); // to define
+                let modal = document.querySelector("#exampleModal");
+                
+                const path = el.getAttribute('path'); 
 
                 var httpRequest = new XMLHttpRequest();
                 httpRequest.onreadystatechange = function() {
@@ -130,6 +132,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     let titleContainer = document.querySelector('.modal-title');
                     titleContainer.innerHTML = '';
                     titleContainer.insertAdjacentHTML('beforeend', 'Choisir "' + json['itemName'] + '"');
+
+                    // modal.show(); 
                 }
 
                 httpRequest.open("POST", path);

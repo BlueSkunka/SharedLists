@@ -10,7 +10,9 @@
                 <td>{{ item.name }}</td>
                 <td>{{ item.reference }} </td>
                 <td>
-                    <button type="button" class="btn btn-sm btn-info purchase-item" data-toggle="modal" data-target="#exampleModal" path="{{ path('listing_item_purchase', {'id': item.id}) }}">Choisir</button>
+                    {% if item.getMaxShare > 0 %}
+                        <button type="button" class="btn btn-sm btn-{{ item.getMaxShare is same as (100) ? 'info' : 'secondary' }} purchase-item" id="purchase-item-open-modal" data-toggle="modal" data-target="#exampleModal" path="{{ path('listing_item_purchase', {'id': item.id}) }}">{{ item.getMaxShare is same as (100) ? 'Choisir' : 'Compléter' }}</button>
+                    {% endif %}
                 </td>
             </tr>
         {% endfor %}
