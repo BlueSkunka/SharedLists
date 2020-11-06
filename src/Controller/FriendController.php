@@ -9,9 +9,16 @@ use Symfony\Component\HttpFoundation\Response;
 use App\Entity\FriendRequest;
 use App\Entity\User;
 use App\Form\FriendRequestType;
+use App\Service\NoticeService;
 
 class FriendController extends AbstractController
 {
+    private $noticeService;
+
+    public function __construct(NoticeService $noticeService) {
+        $this->noticeService = $noticeService;
+    }
+
     public function friends()
     {
         return $this->render('friend/index.html.twig', [
@@ -40,6 +47,13 @@ class FriendController extends AbstractController
                     $friendRequest->setReceiver($friend); 
                     $em->persist($friendRequest);
                     $em->flush();
+
+                    $this->noticeService->createNotice([
+                        'class' => 'info',
+                        'type' => 'friend-request-new',
+                        'user' => $friend,
+                        'request-sender' => $this->getUser()->getUsername()
+                    ]);
 
                     $this->addFlash('success', 'Requête d\'ami envoyée!');
 

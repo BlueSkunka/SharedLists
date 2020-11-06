@@ -4,12 +4,15 @@ namespace App\Entity;
 
 use App\Repository\NoticeRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Traits\SafetyEntityTraits;
 
 /**
  * @ORM\Entity(repositoryClass=NoticeRepository::class)
  */
 class Notice
 {
+    use SafetyEntityTraits;
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -23,14 +26,9 @@ class Notice
     private $text;
 
     /**
-     * @ORM\Column(type="datetime")
-     */
-    private $date;
-
-    /**
      * @ORM\Column(type="boolean")
      */
-    private $seen;
+    private $seen = false;
 
     /**
      * @ORM\ManyToOne(targetEntity=NoticeClass::class, inversedBy="notices")

@@ -6,12 +6,15 @@ use App\Repository\NoticeClassRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Traits\SafetyEntityTraits;
 
 /**
  * @ORM\Entity(repositoryClass=NoticeClassRepository::class)
  */
 class NoticeClass
 {
+    use SafetyEntityTraits;
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
