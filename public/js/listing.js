@@ -84,6 +84,14 @@ document.addEventListener("DOMContentLoaded", function () {
         return true;
     }       
     
+    [].forEach.call(document.querySelectorAll('div.listing-item-remove-buton'), function(el) {
+        el.addEventListener('click', function() {
+            let listContainer = el.parentNode.parentNode;
+            console.log(el.parentNode);
+            listContainer.removeChild(el.parentNode);
+        })
+    });
+
     // Gestion affichage listing - UserList
     [].forEach.call(document.querySelectorAll('div.listing-user'), function(el) {
         el.addEventListener('click', function() {
@@ -133,7 +141,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     titleContainer.innerHTML = '';
                     titleContainer.insertAdjacentHTML('beforeend', 'Choisir "' + json['itemName'] + '"');
 
-                    // modal.show(); 
+                    resetPurchaseShareValueEvent();
                 }
 
                 httpRequest.open("POST", path);
@@ -145,8 +153,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Gestion choix item dans listing - Validate choice
     document.querySelector('#purchase-item-validate').addEventListener('click', function() {
-        console.log('submitting');
         document.forms["purchase"].submit();
     })
-    
+
+    // Gestion choix item dans listing - Display choice
+    function resetPurchaseShareValueEvent() {
+        document.querySelector('#purchase_share').addEventListener('input', function() {
+            const input = document.querySelector('#purchase_share');
+            let span = document.querySelector('#purchase-item-share-value-display');
+            span.innerHTML = '';
+            span.insertAdjacentHTML('beforeend', input.value);
+        })
+    }
 })

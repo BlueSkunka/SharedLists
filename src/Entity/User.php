@@ -109,6 +109,11 @@ class User implements UserInterface
      */
     private $purchases;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Notice::class, mappedBy="user", orphanRemoval=true)
+     */
+    private $notices;
+
     public function __construct()
     {
         $this->sentFriendRequests = new ArrayCollection();
@@ -121,6 +126,7 @@ class User implements UserInterface
         $this->listings = new ArrayCollection();
         $this->publicId = Uuid::v4();
         $this->purchases = new ArrayCollection();
+        $this->notices = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -504,6 +510,37 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($purchase->getBuyer() === $this) {
                 $purchase->setBuyer(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Notice[]
+     */
+    public function getNotices(): Collection
+    {
+        return $this->notices;
+    }
+
+    public function addNotice(Notice $notice): self
+    {
+        if (!$this->notices->contains($notice)) {
+            $this->notices[] = $notice;
+            $notice->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNotice(Notice $notice): self
+    {
+        if ($this->notices->contains($notice)) {
+            $this->notices->removeElement($notice);
+            // set the owning side to null (unless already changed)
+            if ($notice->getUser() === $this) {
+                $notice->setUser(null);
             }
         }
 

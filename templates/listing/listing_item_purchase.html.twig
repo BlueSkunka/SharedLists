@@ -1,7 +1,7 @@
 {{ form_start(form) }}
     Choix du pourcentage d'achat: <br>
     <div class="info">
-        Min: 5% &nbsp; Max: {{ listingItem.getMaxShare }}% &nbsp; Choix: <span id="purchase-item-share-value">{{ listingItem.getMaxShare }}%</span>
+        Min: 5% &nbsp; Max: {{ listingItem.getMaxShare }}% &nbsp; Choix: <span id="purchase-item-share-value-display">{{ listingItem.getMaxShare }}%</span>
     </div>
     {{ form_widget(form.share, {'attr': {'type': 'range'}}) }}
 {{ form_end(form) }}

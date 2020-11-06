@@ -1,15 +1,29 @@
 {{ form_start(form) }}
-    {# <button type="button" class="listing-add-item btn btn-sm btn-info hidden" data-list-selector="ul#listing-update-form">Ajouter</button> #}
     {{ form_errors(form) }}
-
+    
     <ul id="listing-update-form"
         data-prototype="{{ form_widget(form.listingItems.vars.prototype)|e }}"
         data-widget-tags="{{ '<li></li>'|e }}"
         data-widget-counter="{{ form.listingItems|length }}">
 
         {% for itemField in form.listingItems %}
-            {{ form_widget(itemField) }}
-            {{ form_errors(itemField) }}
+            <div class="listing-item">
+                {{ form_label(itemField.name) }}
+                {# <svg class="bi listing-item-remove-buton" width="32" height="32" fill="currentColor">
+                    <use xlink:href="bootstrap-icons.svg#heart-fill"/>X
+                </svg> #}
+
+                <div class="bi listing-item-remove-buton" style="color: red;" path="{{ path('listing_item_remove', {'id': itemField.vars.value.id}) }}">
+                    X
+                </div>
+
+                {{ form_widget(itemField.name) }}
+
+                {{ form_label(itemField.reference) }}
+                {{ form_widget(itemField.reference) }}
+
+                <hr>
+            </div>
         {% endfor %}
         
     </ul>

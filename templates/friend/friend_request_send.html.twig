@@ -1,5 +1,5 @@
 {% for request in app.user.SentFriendRequests %}
-	{{ request.date|date('d-m-Y') }}
+	{{ request.receiver.username }}
 {% else %}
 	Aucune invitation envoyée.
 {% endfor %}

@@ -77,3 +77,7 @@ listing_view:
 listing_item_purchase:
   path: /listing-item/{id}/purchase
   controller: App\Controller\ListingController::listingItemPurchase
+
+listing_item_remove:
+  path: /listing-item/{id}/remove
+  controller: App\Controller\ListingController::listingItemRemove

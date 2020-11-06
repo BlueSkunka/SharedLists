@@ -17,7 +17,8 @@ class ListingType extends AbstractType
         $builder
             ->add('listingItems', CollectionType::class, [
                 'entry_type' => ListingItemType::class,
-                'allow_add' => 'true'
+                'allow_add' => true,
+                'allow_delete' => true
             ])
         ;
     }
