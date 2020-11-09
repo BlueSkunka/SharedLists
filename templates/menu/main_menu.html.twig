@@ -1,6 +1,8 @@
 {% block mainMenu %}
 	{% set home_route = ['home'] %}
-	{% set friends_route = ['friends'] %}
+	{% set friend_route = ['friends'] %}
+	{% set group_route = ['groups', 'user_group_view', 'list_group_view'] %}
+	{% set user_route = ['user_infos'] %}
 
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
 		<div class="container-fluid">
@@ -11,16 +13,16 @@
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav mr-auto mb-2 mb-lg-0">
 					<li class="nav-item">
-						<a class="nav-link active" aria-current="page" href="{{ path('home') }}">Accueil</a>
+						<a class="nav-link {{ route in home_route ? 'active' : '' }}" href="{{ path('home') }}">Accueil</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="{{ path('friends') }}">Amis</a>
+						<a class="nav-link {{ route in friend_route ? 'active' : '' }}" href="{{ path('friends') }}">Amis</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="{{ path('groups') }}">Groupes</a>
+						<a class="nav-link {{ route in group_route ? 'active' : '' }}" href="{{ path('groups') }}">Groupes</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="{{ path('user_infos') }}">Mon compte</a>
+						<a class="nav-link {{ route in user_route ? 'active' : '' }}" href="{{ path('user_infos') }}">Mon compte</a>
 					</li>
 				</ul>
 				<a class="navbar-brand" href="#">{{ app.user.username }}</a>

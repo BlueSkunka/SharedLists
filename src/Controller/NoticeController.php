@@ -14,8 +14,12 @@ class NoticeController extends AbstractController
 {
     public function index()
     {
+        $em = $this->getDoctrine()->getManager();
+
+        $notices = $em->getRepository(Notice::class)->findBy(['seen' => false]);
+
         return $this->render('notice/index.html.twig', [
-            'notices' => $this->getUser()->getNotices(),
+            'notices' => $notices,
         ]);
     }
 

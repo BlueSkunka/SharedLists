@@ -15,7 +15,7 @@
 	<body>
 		{% block navbar %}
 			{% if app.user %}
-				{{ render(controller('App\\Controller\\MenuController::mainMenu')) }}
+				{{ render(controller('App\\Controller\\MenuController::mainMenu', {'route': app.request.attributes.get('_route')})) }}
 			{% endif %}
 		{% endblock %}
 		{% block body %}{% endblock %}
