@@ -37,7 +37,15 @@ class NoticeService {
     public function getNoticeText() {
         switch ($this->options['type']) {
             case 'friend-request-new':
-                return "Vous avez une nouvelle requête d'ami de " . $this->options['request-sender'];
+                return "Vous avez une nouvelle requête d'ami de " . $this->options['request-sender']. '.';
+                break;
+
+            case 'friend-request-accept':
+                return $this->options['request-receiver'] . ' à accepté votr requête d\'ami.';
+                break;
+
+            case 'friend-request-refuse':
+                return $this->options['request-receiver'] . " à refusé votr requête d'ami.";
                 break;
         }
     }

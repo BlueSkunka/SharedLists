@@ -81,3 +81,8 @@ listing_item_purchase:
 listing_item_remove:
   path: /listing-item/{id}/remove
   controller: App\Controller\ListingController::listingItemRemove
+
+# Notice path
+notice_seen:
+  path: /notices/{id}/seen
+  controller: App\Controller\NoticeController::noticeSeen

@@ -86,9 +86,23 @@ class FriendController extends AbstractController
             $em->persist($sender);
             $em->persist($this->getUser());
 
+            $this->noticeService->createNotice([
+                'class' => 'info',
+                'type' => 'friend-request-new',
+                'user' =>  $this->getUser(),
+                'request-receiver' => $friendRequest->getReceiver()->getUsername()
+            ]);
+
             $this->addFlash('success', 'Requête d\'ami acceptée.');
         } else {
             $friendRequest->setState(false);
+
+            $this->noticeService->createNotice([
+                'class' => 'info',
+                'type' => 'friend-request-new',
+                'user' =>  $this->getUser(),
+                'request-receiver' => $friendRequest->getReceiver()->getUsername()
+            ]);
 
             $this->addFlash('warning', 'Requête d\'ami refusée.');
         }

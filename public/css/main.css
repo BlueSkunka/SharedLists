@@ -27,3 +27,7 @@ body {
     font-size: 12px;
     font-style: italic;
 }
+
+.margin-top-sm {
+    margin-top: 3%;
+}

@@ -1,0 +1,15 @@
+{% if (notices|length > 0) %}
+    <div class="container margin-top-sm">
+        <div class="row justify-content-start">
+            <div class="col" id="notice-container">
+            <br>
+                {% for notice in notices %}
+                    <div class="alert alert-{{ notice.noticeClass.name }} alert-dismissible fade show notice" role="alert">
+                        <strong>{{ notice.text }}</strong> - {{ notice.createdAt|date('d-m-Y') }}
+                        <button type="button" class="btn-close btn-notice-seen" data-dismiss="alert" aria-label="Close"  path="{{ path('notice_seen', {'id': notice.id}) }}"></button>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endif %}
