@@ -6,7 +6,7 @@
 			<div class="ariane-item">{{ group.name }}</div>
 		</div>
 		<div class="row">
-			<div class="col">
+			<div class="col main-col">
 				<div class="group_list_group_list">
 					<h2>Listes du groupe</h2>
 					{% for list in group.listGroups %}
@@ -16,7 +16,7 @@
 					{% endfor %}
 				</div>
 			</div>
-			<div class="col">
+			<div class="col main-col">
 				<div class="group_creator row">
 					<h2>Créateur du groupe</h2>
 					{{ group.creator.username }}
@@ -30,7 +30,7 @@
 					{% endfor %}
 				</div>
 			</div>
-			<div class="col">
+			<div class="col main-col">
 				<h2>Invitations au groupe</h2>
 				{% for request in group.userGroupRequests %}
 					{{ request.receiver.username }}
@@ -38,7 +38,7 @@
 					Aucune invitation pour le moment.
 				{% endfor %}
 			</div>
-			<div class="col">
+			<div class="col main-col">
 				<div class="group-list-new row">{{ render(controller('App\\Controller\\ListController::listGroupCreate', {'id': group.id})) }}
 				</div>
 				<div class="user-group-request-new row">

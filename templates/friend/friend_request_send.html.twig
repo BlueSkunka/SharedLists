@@ -4,7 +4,7 @@
 
 {% if (friendRequest|length) > 0 %}
 	{% for request in friendRequest %}
-		<div class="pending-sent-friend-request row align-item-start" id="pending-sent-friend-request-{{ loop.index }}">
+		<div class="pending-sent-friend-request row align-item-start friend-hover" id="pending-sent-friend-request-{{ loop.index }}">
 			<div class="col">
 				{{ request.receiver.username }}
 			</div>

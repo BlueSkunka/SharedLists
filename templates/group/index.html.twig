@@ -6,14 +6,14 @@
 			{{ render(controller('App\\Controller\\GroupController::newUserGroup')) }}
 		</div>
 		<div class="row">
-			<div class="col">
+			<div class="col main-col">
 				<div class="groups-list">
 					<h2>Liste des groupe.s</h2>
 					{% include "group/group_list.html.twig" %}
 				</div>
 				<br><br>
 			</div>
-			<div class="col">
+			<div class="col main-col">
 				<div class="row">
 					<div class="groups-requests-send">
 						<h2>Invitation.s envoyée.s</h2>

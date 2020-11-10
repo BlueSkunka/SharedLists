@@ -11,17 +11,17 @@
 		<div class="row">
 
 			{% if not listGroup.hasUserCreatedListing(app.user) %}
-				<div class="list-new col">
+				<div class="list-new col main-col">
 					{{ render(controller('App\\Controller\\ListingController::listingCreate', {'id': listGroup.id})) }}
 				</div>
 			{% else %}
-				<div class="list-update col">
+				<div class="list-update col main-col">
 					<h2>Votre liste</h2>
 					{{ render(controller('App\\Controller\\ListingController::listingUpdate', {'idListGroup': listGroup.id, 'idListing': app.user.listingByListGroup(listGroup)})) }}
 				</div>		
 			{% endif %}
 						
-			<div class="list-list col">
+			<div class="list-list col main-col">
 				<h2>Listes du groupe<div class="info">(Cliquer sur un utilisateur pour visionner sa liste)</div></h2>
 				{% for listing in listGroup.listings %}
 					{% if app.user.id is not same as (listing.user.id) %}
@@ -34,7 +34,7 @@
 				{% endfor %}
 			</div>
 
-			<div class="list-listing-view col">
+			<div class="list-listing-view col main-col">
 				<h2 id="listing-username"></h2>
 				<div class="list-container"></div>
 			</div>

@@ -1,3 +1,7 @@
-.friend-request:hover{
-    background: blanchedalmond;
+.friend-hover{
+    margin-bottom: 4px;
+}
+
+.friend-hover:hover{
+    background: #b1b1b1;
 }
