@@ -1,5 +1,24 @@
-{% for request in app.user.SentFriendRequests %}
-	{{ request.receiver.username }}
+{% set friendRequest = app.user.pendingSentFriendRequests %}
+
+{% if (friendRequest|length) > 0 %}
+	<div class="container">
+		{% if (friendRequest|length) > 0 %}
+			{% for request in friendRequest %}
+				<div class="pending-sent-friend-request row align-item-start">
+					<div class="col">
+						{{ request.receiver.username }}
+					</div>
+					<div class="col">
+						<i>{{ request.date|date('d-m-Y') }}</i>
+					</div>
+					<div class="col">
+						<button type="button" class="btn btn-sm btn-danger btn-remove-friend-request" data-toggle="tooltip" data-placement="top" title="Annuler">X</button>
+					</div>
+				</div>
+			{% endfor %}
+		{% endif %}
+
+	</div>
 {% else %}
 	Aucune invitation envoyée.
-{% endfor %}
+{% endif %}

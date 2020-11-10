@@ -26,6 +26,10 @@ friend_new:
   path: /new-friend
   controller: App\Controller\FriendController::newFriend
 
+friend_request_remove:
+  path: /friend-request/{id}/remove
+  controller: App\Controller\FriendController::friendRequestRemove
+
 friend_request_response:
   path: /friend-request/{id}/{state}
   controller: App\Controller\FriendController::friendRequestResponse

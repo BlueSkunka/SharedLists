@@ -5,22 +5,22 @@
 		{{ render(controller('App\\Controller\\FriendController::newFriend')) }}
 
 		<div class="row">
-			<div class="col">
+			<div class="col main-col">
 				<div class="friends-list">
-					<h2>Liste d'ami.s</h2>
+					<h2>Liste d'ami{{ (app.user.friends|length) > 1 ? 's' : '' }}</h2>
 					{% include "friend/friend_list.html.twig" %}
 				</div>
 			</div>
-			<div class="col">
+			<div class="col main-col">
 				<div class="row">
 					<div class="friends-requests-send">
-						<h2>Invitation.s envoyée.s</h2>
+						<h2>Invitation{{ (app.user.sentFriendRequests|length) > 1 ? 's' : '' }} envoyée{{ (app.user.sentFriendRequests|length) > 1 ? 's' : '' }}</h2>
 						{% include "friend/friend_request_send.html.twig" %}
 					</div>
 				</div>
 				<div class="row">
 					<div class="friends-requests-received">
-						<h2>Invitation.s reçue.s</h2>
+						<h2>Invitation{{ (app.user.receivedFriendRequests|length) > 1 ? 's' : '' }} reçue{{ (app.user.receivedFriendRequests|length) > 1 ? 's' : '' }}</h2>
 						{% include "friend/friend_request_received.html.twig" %}
 					</div>
 				</div>

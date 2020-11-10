@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Entity\FriendRequest;
 use App\Entity\User;
 use App\Form\FriendRequestType;
@@ -111,5 +112,16 @@ class FriendController extends AbstractController
         $em->flush();
 
         return $this->redirect($this->generateUrl('friends'));
+    }
+
+    public function friendRequestRemove(FriendRequest $friendRequest) {
+        $em = $this->getDoctrine()->getManager();
+
+        $em->remove($friendRequest);
+        $em->flush();
+
+        return new JsonResponse([
+            'statut' => 'ok'
+        ]);
     }
 }
