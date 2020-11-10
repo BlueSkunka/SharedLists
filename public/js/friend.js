@@ -1,25 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    console.log('App working');
-
-    // !To rework
-    // [].forEach.call(document.querySelectorAll('button.friend-request-response'), function (btn) {
-    //     btn.addEventListener('click', function () {
-    //         let path = btn.getAttribute('path');
-
-    //         var httpRequest = new XMLHttpRequest();
-    //         httpRequest.onreadystatechange = function (data) {
-    //             console.log('uu');
-    //         };
-
-    //         httpRequest.setRequestHeader(
-    //             "Content-Type",
-    //             "text/json"
-    //         );
-
-    //         httpRequest.open("POST", path);
-    //         httpRequest.send();
-    //     })
-    // });
+    console.log('Friend javascript working');
 
     // Friend Request - Cancel request
     [].forEach.call(document.querySelectorAll('.btn-remove-friend-request'), function(el) {
@@ -78,4 +58,5 @@ document.addEventListener("DOMContentLoaded", function () {
             httpRequest.send();
         });
     })
+
 });
