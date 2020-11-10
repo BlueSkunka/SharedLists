@@ -87,31 +87,35 @@ class FriendController extends AbstractController
             $em->persist($sender);
             $em->persist($this->getUser());
 
-            $this->noticeService->createNotice([
-                'class' => 'info',
-                'type' => 'friend-request-new',
-                'user' =>  $this->getUser(),
-                'request-receiver' => $friendRequest->getReceiver()->getUsername()
-            ]);
+            // $this->noticeService->createNotice([
+            //     'class' => 'info',
+            //     'type' => 'friend-request-new',
+            //     'user' =>  $this->getUser(),
+            //     'request-receiver' => $friendRequest->getReceiver()->getUsername()
+            // ]);
 
-            $this->addFlash('success', 'Requête d\'ami acceptée.');
+            $em->persist($friendRequest);
+            $em->flush();
+
+            return new JsonResponse([
+                'statut' => 'ok',
+                'username' => $sender->getUsername()
+            ]);
         } else {
             $friendRequest->setState(false);
 
-            $this->noticeService->createNotice([
-                'class' => 'info',
-                'type' => 'friend-request-new',
-                'user' =>  $this->getUser(),
-                'request-receiver' => $friendRequest->getReceiver()->getUsername()
-            ]);
+            // $this->noticeService->createNotice([
+            //     'class' => 'info',
+            //     'type' => 'friend-request-new',
+            //     'user' =>  $this->getUser(),
+            //     'request-receiver' => $friendRequest->getReceiver()->getUsername()
+            // ]);
 
-            $this->addFlash('warning', 'Requête d\'ami refusée.');
+            $em->persist($friendRequest);
+            $em->flush();
+
+            return new JsonResponse(['statut' => 'ok']);
         }
-
-        $em->persist($friendRequest);
-        $em->flush();
-
-        return $this->redirect($this->generateUrl('friends'));
     }
 
     public function friendRequestRemove(FriendRequest $friendRequest) {

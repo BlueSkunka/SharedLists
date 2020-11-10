@@ -26,4 +26,15 @@ trait UserFunctions
 
         return $requests;
     }
+
+    public function getPendingReceivedFriendRequests() {
+        $requests = [];
+
+        foreach ($this->getReceivedFriendRequests() as $request ) {
+            if (\is_null($request->getState()))
+                $requests[] = $request;
+        }
+
+        return $requests;
+    }
 }

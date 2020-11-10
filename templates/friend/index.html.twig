@@ -6,7 +6,7 @@
 
 		<div class="row">
 			<div class="col main-col">
-				<div class="friends-list">
+				<div id="friends-list">
 					<h2>Liste d'ami{{ (app.user.friends|length) > 1 ? 's' : '' }}</h2>
 					{% include "friend/friend_list.html.twig" %}
 				</div>
