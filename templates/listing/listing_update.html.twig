@@ -8,20 +8,17 @@
 
         {% for itemField in form.listingItems %}
             <div class="listing-item">
-                {{ form_label(itemField.name) }}
-                {# <svg class="bi listing-item-remove-buton" width="32" height="32" fill="currentColor">
-                    <use xlink:href="bootstrap-icons.svg#heart-fill"/>X
-                </svg> #}
+                <div class=" input-group input-group-sm mb-3">
+                    {{ form_widget(itemField.name) }}
 
-                <div class="bi listing-item-remove-buton" style="color: red;" path="{{ path('listing_item_remove', {'id': itemField.vars.value.id}) }}">
-                    X
+                    <div class="bi listing-item-remove-buton btn btn-danger btn-xs" path="{{ path('listing_item_remove', {'id': itemField.vars.value.id}) }}" data-toggle="tooltip" data-placement="top" title="Supprimer">
+                        X
+                    </div>
                 </div>
 
-                {{ form_widget(itemField.name) }}
-
-                {{ form_label(itemField.reference) }}
-                {{ form_widget(itemField.reference) }}
-
+                <div class=" input-group input-group-sm mb-3">
+                    {{ form_widget(itemField.reference) }}
+                </div>
                 <hr>
             </div>
         {% endfor %}

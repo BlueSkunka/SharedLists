@@ -25,7 +25,7 @@
 				<h2>Listes du groupe<div class="info">(Cliquer sur un utilisateur pour visionner sa liste)</div></h2>
 				{% for listing in listGroup.listings %}
 					{% if app.user.id is not same as (listing.user.id) %}
-						<div class="listing-user" path="{{ path('listing_view', {'id': listing.id}) }}">
+						<div class="listing-user dark-hover" path="{{ path('listing_view', {'id': listing.id}) }}">
 							{{ listing.user.username }}
 						</div>
 					{% endif %}

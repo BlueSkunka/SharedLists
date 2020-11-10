@@ -31,3 +31,14 @@ body {
 .margin-top-sm {
     margin-top: 3%;
 }
+
+.btn-xs{
+    padding: .25rem .5rem;
+    font-size: .600rem;
+    border-radius: .2rem;
+}
+
+/* HOVERS */
+.dark-hover:hover{
+    background-color: #d6d8d9;
+}
