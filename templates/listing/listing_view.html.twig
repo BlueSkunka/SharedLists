@@ -6,12 +6,19 @@
             <th></th>
         </tr>
         {% for item in listing.listingItems %}
-            <tr>
+            {% if item.getMaxShare < 1 %}
+                {% set backgroundColor = 'secondary' %}
+            {% elseif item.getMaxShare is same as(100) %}
+                {% set backgroundColor = 'info' %}
+            {% else %}
+                {% set backgroundColor = 'warning' %}
+            {% endif %} 
+            <tr class="table-{{ backgroundColor }}">
                 <td>{{ item.name }}</td>
                 <td>{{ item.reference }} </td>
                 <td>
                     {% if item.getMaxShare > 0 %}
-                        <button type="button" class="btn btn-sm btn-{{ item.getMaxShare is same as (100) ? 'info' : 'secondary' }} purchase-item" id="purchase-item-open-modal" data-toggle="modal" data-target="#exampleModal" path="{{ path('listing_item_purchase', {'id': item.id}) }}">{{ item.getMaxShare is same as (100) ? 'Choisir' : 'Compléter' }}</button>
+                        <button type="button" class="btn btn-sm btn-{{ item.getMaxShare is same as (100) ? 'info' : 'warning' }} purchase-item" id="purchase-item-open-modal" data-toggle="modal" data-target="#exampleModal" path="{{ path('listing_item_purchase', {'id': item.id}) }}">{{ item.getMaxShare is same as (100) ? 'Choisir' : 'Compléter' }}</button>
                     {% endif %}
                 </td>
             </tr>

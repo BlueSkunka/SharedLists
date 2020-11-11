@@ -2,9 +2,13 @@
 
 {% block body %}
 	<div class="container">
-		<div class="row ariane">
-			<div class="ariane-item">{{ group.name }}</div>
-		</div>
+		<br>
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item active" aria-current="page">{{ group.name }}</li>
+			</ol>
+		</nav>
+
 		<div class="row">
 			<div class="col main-col">
 				<div class="group_list_group_list">

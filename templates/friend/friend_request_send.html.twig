@@ -1,22 +1,21 @@
 {% set friendRequest = app.user.pendingSentFriendRequests %}
 
 <div class="container">
-
-{% if (friendRequest|length) > 0 %}
-	{% for request in friendRequest %}
-		<div class="pending-sent-friend-request row align-item-start friend dark-hover" id="pending-sent-friend-request-{{ loop.index }}">
-			<div class="col">
-				{{ request.receiver.username }}
+	{% if (friendRequest|length) > 0 %}
+		{% for request in friendRequest %}
+			<div class="pending-sent-friend-request row align-item-start friend dark-hover" id="pending-sent-friend-request-{{ loop.index }}">
+				<div class="col">
+					{{ request.receiver.username }}
+				</div>
+				<div class="col">
+					<i>{{ request.date|date('d-m-Y') }}</i>
+				</div>
+				<div class="col">
+					<button type="button" class="btn btn-sm btn-warning btn-remove-friend-request" data-toggle="tooltip" data-placement="top" title="Annuler" path="{{ path('friend_request_remove', {'id': request.id}) }}" container="div#pending-sent-friend-request-{{ loop.index }}">X</button>
+				</div>
 			</div>
-			<div class="col">
-				<i>{{ request.date|date('d-m-Y') }}</i>
-			</div>
-			<div class="col">
-				<button type="button" class="btn btn-sm btn-warning btn-remove-friend-request" data-toggle="tooltip" data-placement="top" title="Annuler" path="{{ path('friend_request_remove', {'id': request.id}) }}" container="div#pending-sent-friend-request-{{ loop.index }}">X</button>
-			</div>
-		</div>
-	{% endfor %}
-{% else %}
-	Aucune invitation envoyée.
-{% endif %}
+		{% endfor %}
+	{% else %}
+		Aucune invitation envoyée.
+	{% endif %}
 </div>

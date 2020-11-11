@@ -2,11 +2,13 @@
 
 {% block body %}
 	<div class="container-xxl">
-		<div class="row ariane">
-			<a href="{{ path('user_group_view', {'id': listGroup.userGroup.id}) }}">{{ listGroup.userGroup.name }}</a>
-			>
-			{{ listGroup.name }}
-		</div>
+	<br>
+		<nav aria-label="breadcrumb">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="{{ path('user_group_view', {'id': listGroup.userGroup.id}) }}">{{ listGroup.userGroup.name }}</a></li>
+			<li class="breadcrumb-item active" aria-current="page">{{ listGroup.name }}</li>
+		</ol>
+		</nav>
 
 		<div class="row">
 

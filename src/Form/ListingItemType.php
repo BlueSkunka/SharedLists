@@ -13,15 +13,17 @@ class ListingItemType extends AbstractType
     {
         $builder
             ->add('name', null, [
-                'label' => 'Nom',
+                'label' => false,
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control',
+                    'placeholder' => 'Nom'
                 ]
             ])
             ->add('reference', null, [
-                'label' => 'Information',
+                'label' => false,
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control',
+                    'placeholder' => 'Informations'
                 ]
             ])
         ;
