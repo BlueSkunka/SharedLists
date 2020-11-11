@@ -2,6 +2,7 @@
 	{% set home_route = ['home'] %}
 	{% set friend_route = ['friends'] %}
 	{% set group_route = ['groups', 'user_group_view', 'list_group_view'] %}
+	{% set purchase_route = ['purchases'] %}
 	{% set user_route = ['user_infos'] %}
 
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
@@ -20,6 +21,9 @@
 					</li>
 					<li class="nav-item">
 						<a class="nav-link {{ route in group_route ? 'active' : '' }}" href="{{ path('groups') }}">Groupes</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link {{ route in purchase_route ? 'active' : '' }}" href="{{ path('purchases') }}">Mes achats</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link {{ route in user_route ? 'active' : '' }}" href="{{ path('user_infos') }}">Mon compte</a>

@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes achats{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <h1>Mes achats</h1>
+    <div class="row">
+        <div class="main-col col">
+            {% include "purchase/purchase_to_buy" with {'purchases': app.user.getPurchaseByStateAndMain(false, true)} %}
+        </div>
+        <div class="main-col col">
+            {% include "purchase/purchase_to_refund" with {'purchases': app.user.getPurchaseByStateAndMain(false, false)} %}
+        </div>
+        <div class="main-col col">
+            {% include "purchase/purchase_done" with {'buyingPurchases': app.user.getPurchaseByStateAndMain(true, true), 'refundPurchase': app.user.getPurchaseByStateAndMain(true, false)} %}
+        </div>
+    </div>
+</div>
+{% endblock %}

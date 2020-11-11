@@ -4,12 +4,17 @@ namespace App\Entity;
 
 use App\Repository\PurchaseRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Traits\SafetyEntityTraits;
+use App\Entity\Functions\PurchaseFunctions;
 
 /**
  * @ORM\Entity(repositoryClass=PurchaseRepository::class)
  */
 class Purchase
 {
+    use SafetyEntityTraits;
+    use PurchaseFunctions;
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue

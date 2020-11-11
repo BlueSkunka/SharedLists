@@ -90,3 +90,8 @@ listing_item_remove:
 notice_seen:
   path: /notices/{id}/seen
   controller: App\Controller\NoticeController::noticeSeen
+
+# Purchase path
+purchases:
+  path: /purchases
+  controller: App\Controller\PurchaseController:purchases

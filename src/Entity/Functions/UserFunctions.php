@@ -37,4 +37,15 @@ trait UserFunctions
 
         return $requests;
     }
+
+    public function getPurchaseByStateAndMain(bool $state, bool $main) {
+        $purchases = [];
+
+        foreach ($this->getPurchases() as $purchase) {
+            if ($purchase->getState() == $state & $purchase->getMainPurchase() == $main)
+                $purchases[] = $purchase;
+        }
+
+        return $purchases;
+    }
 }
