@@ -8,13 +8,13 @@
     <h1>Mes achats</h1>
     <div class="row">
         <div class="main-col col">
-            {% include "purchase/purchase_to_buy" with {'purchases': app.user.getPurchaseByStateAndMain(false, true)} %}
+            {% include "purchase/purchase_to_buy.html.twig" with {'purchases': app.user.getPurchaseByStateAndMain(false, true)} %}
         </div>
         <div class="main-col col">
-            {% include "purchase/purchase_to_refund" with {'purchases': app.user.getPurchaseByStateAndMain(false, false)} %}
+            {% include "purchase/purchase_to_refund.html.twig" with {'purchases': app.user.getPurchaseByStateAndMain(false, false)} %}
         </div>
         <div class="main-col col">
-            {% include "purchase/purchase_done" with {'buyingPurchases': app.user.getPurchaseByStateAndMain(true, true), 'refundPurchase': app.user.getPurchaseByStateAndMain(true, false)} %}
+            {% include "purchase/purchase_done.html.twig" with {'boughtPurchases': app.user.getPurchaseByStateAndMain(true, true), 'refundedPurchases': app.user.getPurchaseByStateAndMain(true, false)} %}
         </div>
     </div>
 </div>

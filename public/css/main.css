@@ -32,6 +32,10 @@ body {
     margin-top: 3%;
 }
 
+.text-align-end {
+    text-align: end;
+}
+
 /* BREADCRUMB */
 .breadcrumb {
     background-color: #adadad;

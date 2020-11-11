@@ -1,0 +1,16 @@
+<div class="container">
+    <h3>A acheter</h3>
+
+    {% for purchase in purchases %}
+        <div class="purchase row dark-hover" id="purchase-to-buy-{{ loop.index }}">
+            <div class="col align-self-start">
+                {{ purchase.listingItem.name }}
+            </div>
+            <div class="col align-self-end text-align-end">
+                <button class="btn btn-info btn-sm" data-container="body" data-toggle="top" data-content="{{ purchase.listingItem.reference }}">I</button>
+                <button class="btn btn-success btn-sm btn-purchase-buy" path="" container="div#purchase-to-buy-{{ loop.index }}">B</button>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+<br>

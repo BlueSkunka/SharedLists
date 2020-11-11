@@ -7,13 +7,10 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class PurchaseController extends AbstractController
 {
-    /**
-     * @Route("/purchase", name="purchase")
-     */
-    public function index()
+    public function purchases()
     {
         return $this->render('purchase/index.html.twig', [
-            
+
         ]);
     }
 }

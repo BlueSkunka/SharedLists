@@ -1,0 +1,21 @@
+<div class="container">
+    <div class="purchase-bought">
+        <h3>Acheté{{ (boughtPurchases|length) > 1 ? 's' : '' }}</h3>
+
+        {% for purchase in boughtPurchases %}
+            <div class="purchase row dark-hover">
+                {{ purchase.listingItem.name}}
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="purchase-refunded">
+        <h3>Remboursé{{ (refundedPurchases|length) > 1 ? 's' : '' }}</h3>
+
+        {% for purchase in refundedPurchases %}
+            <div class="purchase row dark-hover">
+                {{ purchase.listingItem.name}}
+            </div>
+        {% endfor %}
+    </div>
+</div>
