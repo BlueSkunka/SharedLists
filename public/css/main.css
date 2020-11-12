@@ -36,6 +36,11 @@ body {
     text-align: end;
 }
 
+.overflow-container {
+    width: 95%;
+    height: 80%;
+}
+
 /* BREADCRUMB */
 .breadcrumb {
     background-color: #adadad;
