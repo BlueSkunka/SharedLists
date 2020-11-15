@@ -1,0 +1,9 @@
+<div class="purchase row dark-hover" id="purchase-done-{{ purchase.id }}">
+    <div class="col align-self-start">
+        {{ purchase.listingItem.name}}
+    </div>
+    <div class="col algin-self-end text-align-end">
+        <button class="btn btn-info btn-sm">I</button>
+        <button class="btn btn-danger btn-sm btn-purchase-cancel" path="{{ path('purchase_cancel', {'id': purchase.id}) }}" container="div#purchase-done-{{ purchase.id }}">C</button>
+    </div>
+</div>

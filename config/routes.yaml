@@ -94,4 +94,12 @@ notice_seen:
 # Purchase path
 purchases:
   path: /purchases
-  controller: App\Controller\PurchaseController:purchases
+  controller: App\Controller\PurchaseController::purchases
+
+purchase_done:
+  path: /purchase/{id}/done
+  controller: App\Controller\PurchaseController::done 
+
+purchase_cancel:
+  path: /purchase/{id}/cancel
+  controller: App\Controller\PurchaseController::cancel

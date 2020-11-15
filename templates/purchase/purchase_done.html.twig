@@ -2,20 +2,23 @@
     <div class="purchase-bought">
         <h3>Acheté{{ (boughtPurchases|length) > 1 ? 's' : '' }}</h3>
 
-        {% for purchase in boughtPurchases %}
-            <div class="purchase row dark-hover">
-                {{ purchase.listingItem.name}}
-            </div>
-        {% endfor %}
+        <div class="purchase-bought-container">
+            {% for purchase in boughtPurchases %}
+                {% include "purchase/purchase_done_item.html.twig" with {'purchase': purchase} %}
+            {% endfor %}
+        </div>
+        
     </div>
 
     <div class="purchase-refunded">
         <h3>Remboursé{{ (refundedPurchases|length) > 1 ? 's' : '' }}</h3>
 
-        {% for purchase in refundedPurchases %}
-            <div class="purchase row dark-hover">
-                {{ purchase.listingItem.name}}
-            </div>
-        {% endfor %}
+        <div class="purchase-refunded-container">
+            {% for purchase in refundedPurchases %}
+                {% include "purchase/purchase_done_item.html.twig" with {'purchase': purchase} %}
+            {% endfor %}
+        </div>
+        
     </div>
+    <br>
 </div>

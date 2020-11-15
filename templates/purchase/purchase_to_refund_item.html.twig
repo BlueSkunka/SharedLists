@@ -1,0 +1,9 @@
+<div class="purchase row dark-hover" id="purchase-to-refund-{{ purchase.id }}">
+    <div class="col align-self-start">
+        {{ purchase.listingItem.name }}
+    </div>
+    <div class="col align-self-end text-align-end">
+        <button class="btn btn-info btn-sm" data-container="body" data-toggle="top" data-content="{{ purchase.listingItem.reference }}">I</button>
+        <button class="btn btn-success btn-sm btn-purchase-done" path="{{ path('purchase_done', {'id': purchase.id}) }}" container="div#purchase-to-refund-{{ purchase.id }}">R</button>
+    </div>
+</div>

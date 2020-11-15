@@ -23,10 +23,10 @@
 						<a class="nav-link {{ route in group_route ? 'active' : '' }}" href="{{ path('groups') }}">Groupes</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link {{ route in purchase_route ? 'active' : '' }}" href="{{ path('purchases') }}">Mes achats</a>
+						<a class="nav-link {{ route in purchase_route ? 'active' : '' }}" href="{{ path('purchases') }}">Achats</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link {{ route in user_route ? 'active' : '' }}" href="{{ path('user_infos') }}">Mon compte</a>
+						<a class="nav-link {{ route in user_route ? 'active' : '' }}" href="{{ path('user_infos') }}">Compte</a>
 					</li>
 				</ul>
 				<a class="navbar-brand" href="#">{{ app.user.username }}</a>
