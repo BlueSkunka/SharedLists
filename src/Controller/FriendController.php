@@ -7,6 +7,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use App\Service\SecurityService;
 use App\Entity\FriendRequest;
 use App\Entity\User;
 use App\Form\FriendRequestType;
@@ -15,18 +16,24 @@ use App\Service\NoticeService;
 class FriendController extends AbstractController
 {
     private $noticeService;
+    private $securityService;
 
-    public function __construct(NoticeService $noticeService) {
+    public function __construct(NoticeService $noticeService, SecurityService $securityService) {
         $this->noticeService = $noticeService;
+        $this->securityService = $securityService;
     }
 
     public function friends()
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
         return $this->render('friend/index.html.twig', [
         ]);
     }
 
     public function newFriend(Request $request) {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
         $em = $this->getDoctrine()->getManager();
 
         $friendRequest = new FriendRequest();
@@ -74,6 +81,8 @@ class FriendController extends AbstractController
     }
 
     public function friendRequestResponse(FriendRequest $friendRequest, String $state) {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
         $em = $this->getDoctrine()->getManager();
 
         if ("accept" == $state) {
@@ -119,6 +128,8 @@ class FriendController extends AbstractController
     }
 
     public function friendRequestRemove(FriendRequest $friendRequest) {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
         $em = $this->getDoctrine()->getManager();
 
         $em->remove($friendRequest);

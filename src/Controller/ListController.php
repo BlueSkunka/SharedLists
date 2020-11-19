@@ -7,6 +7,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use App\Service\SecurityService;
 use App\Form\ListGroupType;
 use App\Entity\UserGroup;
 use App\Entity\ListGroup;
@@ -14,11 +15,20 @@ use App\Entity\Listing;
 
 class ListController extends AbstractController
 {
+    private $securityService;
+
+    public function __construct(SecurityService $securityService) {
+        $this->securityService = $securityService;
+    }
+
     /**
      * @ParamConverter("userGroup", options={"id": "idGroup"})
      * @ParamConverter("listGroup", options={"id": "idList"})
      */
     public function listGroupView(UserGroup $userGroup, ListGroup $listGroup) {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+        if (!$this->securityService->isUserGroupMember($this->getUser(), $userGroup))
+            $this->denyAccessUnlessGranted('');
 
         return $this->render('list/list_group_view.html.twig', [
             'listGroup' => $listGroup
@@ -27,6 +37,8 @@ class ListController extends AbstractController
 
     public function listGroupCreate(Request $request, UserGroup $userGroup)
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
         $em = $this->getDoctrine()->getManager();
 
         $listGroup = new ListGroup();

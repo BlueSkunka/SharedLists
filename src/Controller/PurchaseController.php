@@ -8,18 +8,29 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use App\Service\SecurityService;
 use App\Entity\Purchase;
 
 class PurchaseController extends AbstractController
 {
+    private $securityService;
+
+    public function __construct(SecurityService $securityService) {
+        $this->securityService = $securityService;
+    }
+    
     public function purchases()
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
         return $this->render('purchase/index.html.twig', [
 
         ]);
     }
 
     public function done(Purchase $purchase) {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
         $em = $this->getDoctrine()->getManager();
         
         $purchase->setState(true);
@@ -38,6 +49,8 @@ class PurchaseController extends AbstractController
     }
 
     public function cancel(Purchase $purchase) {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
         $em = $this->getDoctrine()->getManager();
 
         $purchase->setState(false);

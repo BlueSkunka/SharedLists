@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use App\Service\SecurityService;
 use App\Form\ListingType;
 use App\Form\PurchaseType;
 use App\Entity\UserGroup;
@@ -18,8 +19,15 @@ use App\Entity\Purchase;
 
 class ListingController extends AbstractController
 {
+    private $securityService;
+
+    public function __construct(SecurityService $securityService) {
+        $this->securityService = $securityService;
+    }
     
     public function listingCreate(Request $request, ListGroup $listGroup) {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
         $em = $this->getDoctrine()->getManager();
 
         $listing = new Listing();
@@ -59,6 +67,7 @@ class ListingController extends AbstractController
      * @ParamConverter("listing", options={"id": "idListing"})
      */
     public function listingUpdate(Request $request, ListGroup $listGroup, Listing $listing) {
+        $this->denyAccessUnlessGranted('ROLE_USER');
 
         $em = $this->getDoctrine()->getManager();
 
@@ -102,6 +111,7 @@ class ListingController extends AbstractController
     }
 
     public function listingView(Listing $listing) {
+        $this->denyAccessUnlessGranted('ROLE_USER');
 
         $html =  $this->render('listing/listing_view.html.twig', [
             'listing' => $listing
@@ -115,6 +125,8 @@ class ListingController extends AbstractController
     }
 
     public function listingItemPurchase(Request $request, ListingItem $listingItem) {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
         $em = $this->getDoctrine()->getManager();
         
         $purchase = new Purchase();

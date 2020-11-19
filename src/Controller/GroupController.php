@@ -7,6 +7,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use App\Service\SecurityService;
 use App\Form\UserGroupType;
 use App\Form\UserGroupRequestType;
 use App\Entity\UserGroup;
@@ -14,14 +15,23 @@ use App\Entity\UserGroupRequest;
 
 class GroupController extends AbstractController
 {
+    private $securityService;
+
+    public function __construct(SecurityService $securityService) {
+        $this->securityService = $securityService;
+    }
 
     public function groups()
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
         return $this->render('group/index.html.twig', [
         ]);
     }
 
     public function newUserGroup(Request $request) {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
         $em = $this->getDoctrine()->getManager();
 
         $group = new UserGroup();
@@ -62,6 +72,9 @@ class GroupController extends AbstractController
     }
 
     public function viewUserGroup(UserGroup $userGroup) {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+        if (!$this->securityService->isUserGroupMember($this->getUser(), $userGroup))
+            $this->denyAccessUnlessGranted('');
 
         return $this->render('group/group_view.html.twig', [
             'group' => $userGroup
@@ -69,6 +82,8 @@ class GroupController extends AbstractController
     }
 
     public function userGroupRequest(Request $request, UserGroup $userGroup) {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
         $em = $this->getDoctrine()->getManager();
 
         $userGroupRequest = new UserGroupRequest();
@@ -111,6 +126,8 @@ class GroupController extends AbstractController
      */
     public function userGroupRequestResponse(UserGroup $userGroup, UserGroupRequest $userGroupRequest, string $state)
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
         $em = $this->getDoctrine()->getManager();
 
         $redirectPath = "";
