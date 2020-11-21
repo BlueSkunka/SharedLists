@@ -14,9 +14,10 @@
 		{% endblock %}
 	</head>
 	<body>
+		{% set route = app.request.attributes.get('_route') %}
 		{% block navbar %}
 			{% if app.user %}
-				{{ render(controller('App\\Controller\\MenuController::mainMenu', {'route': app.request.attributes.get('_route')})) }}
+				{{ render(controller('App\\Controller\\MenuController::mainMenu', {'route': route})) }}
 			{% endif %}
 		{% endblock %}
 		{% block body %}{% endblock %}
@@ -24,10 +25,21 @@
 			<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 			<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
 
-			<script src="{{ asset('js/friend.js') }}"></script>
-			<script src="{{ asset('js/listing.js') }}"></script>
-			<script src="{{ asset('js/notice.js') }}"></script>
-			<script src="{{ asset('js/purchase.js') }}"></script>
+			{# Load required javascript #}
+			{% set home_route = ['home'] %}
+			{% set friend_route = ['friends'] %}
+			{% set group_route = ['groups', 'user_group_view'] %}
+			{% set listing_route = ['list_group_view'] %}
+			{% set purchase_route = ['purchases'] %}
+			{% set user_route = ['user_infos'] %}
+
+			{% if route in home_route %}<script src="{{ asset('js/notice.js') }}"></script>{% endif %}
+			{% if route in friend_route %}<script src="{{ asset('js/friend.js') }}"></script>{% endif %}
+			{% if route in listing_route %}<script src="{{ asset('js/listing.js') }}"></script>{% endif %}
+			{% if route in purchase_route %}<script src="{{ asset('js/purchase.js') }}"></script>{% endif %}
+			{% if route in user_route %}{% endif %}
+			{# Load required javascript #}
+
 		{% endblock %}
 	</body>
 </html>
